@@ -1,0 +1,36 @@
+[submodule "DirectX-Headers"]
+	path = DirectX-Headers
+	url = https://github.com/microsoft/DirectX-Headers.git
+[submodule "cairo"]
+	path = cairo
+	url = https://gitlab.freedesktop.org/cairo/cairo.git
+[submodule "libdrm"]
+	path = libdrm
+	url = https://gitlab.freedesktop.org/mesa/drm.git
+[submodule "libdisplay-info"]
+	path = libdisplay-info
+	url = https://gitlab.freedesktop.org/emersion/libdisplay-info.git
+[submodule "libinput"]
+	path = libinput
+	url = https://gitlab.freedesktop.org/libinput/libinput
+[submodule "libxkbcommon"]
+	path = libxkbcommon
+	url = https://github.com/xkbcommon/libxkbcommon.git
+[submodule "mesa"]
+	path = mesa
+	url = https://gitlab.freedesktop.org/mesa/mesa.git
+[submodule "pixman"]
+	path = pixman
+	url = https://gitlab.freedesktop.org/pixman/pixman.git
+[submodule "seatd"]
+	path = seatd
+	url = https://git.sr.ht/~kennylevinsen/seatd
+[submodule "wayland"]
+	path = wayland
+	url = https://gitlab.freedesktop.org/wayland/wayland.git
+[submodule "wayland-protocols"]
+	path = wayland-protocols
+	url = https://gitlab.freedesktop.org/wayland/wayland-protocols.git
+[submodule "weston"]
+	path = weston
+	url = https://gitlab.freedesktop.org/wayland/weston.git
