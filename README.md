@@ -1,6 +1,8 @@
-# Install wayland/weston and mesa on WSL2 Ubuntu-22.04
+# Build wayland/weston and mesa on Ubuntu-22.04
 
-## Downlanding the code
+Verified on WSL2, VMware Machine.
+
+## Downloading the code
 
 ``` bash
 mkdir -p $HOME/workspace
@@ -27,15 +29,16 @@ pip3 install meson==0.63
 Setup custom installation path to not disturb the default linux installation.
 Setup needed environment settings without impacting your overall system settings.
 You can add this in your .bashrc file.
-Note that `gfx_wayland_build` need to be run in any terminal you want to launch these costom build components.
+Note that `gfx_wayland_setup` need to be run in any terminal you want to launch these costom build components.
 
 ``` bash
-function gfx_wayland_build() {
+function gfx_wayland_setup() {
     export GFX_SOURCE=$HOME/workspace/gfx-wayland
     export GFX_INSTALL=$GFX_SOURCE/out
     export EGL_PLATFORM=wayland
     export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:$GFX_INSTALL/etc/xdg
     export LD_LIBRARY_PATH=$GFX_INSTALL/lib:$GFX_INSTALL/lib/x86_64-linux-gnu:$GFX_INSTALL/lib/x86_64-linux-gnu/dri
+    export LIBRARY_PATH=$GFX_INSTALL/lib:$LIBRARY_PATH
     export PKG_CONFIG_PATH=$GFX_INSTALL/share/pkgconfig:$GFX_INSTALL/lib/pkgconfig:$GFX_INSTALL/lib64/pkgconfig:$GFX_INSTALL/lib/x86_64-linux-gnu/pkgconfig
     export PATH=$GFX_INSTALL:$GFX_INSTALL/bin:$PATH
     export ACLOCAL_PATH=$GFX_INSTALL/share/aclocal
@@ -164,6 +167,23 @@ meson $GFX_INSTALL/build/weston --prefix=$GFX_INSTALL \
     -Dxwayland=false -Dremoting=false -Dpipewire=false \
     -Dimage-jpeg=false -Dimage-webp=false -Ddemo-clients=false
 ninja -C $GFX_INSTALL/build/weston install
+```
+
+## Running weston and wayland-client
+
+Opening Terminal A to launch wayland-server:
+
+``` bash
+gfx_wayland_setup
+$GFX_INSTALL/bin/weston --debug --shell=desktop-shell.so
+```
+
+Opening Terminal B to launch wayland-client:
+
+``` bash
+gfx_wayland_setup
+export WAYLAND_DISPLAY=wayland-1
+$GFX_INSTALL/bin/weston-simple-egl
 ```
 
 ## Reference
