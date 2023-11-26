@@ -13,8 +13,8 @@ git clone --recurse-submodules https://github.com/sepnic/gfx-wayland.git
 ## Installing system dependencies
 
 ``` bash
-sudo apt-get install cmake build-essential bison flex autoconf meson hwdata \
-    python3-pip python3-mako pkg-config
+sudo apt-get install cmake build-essential bison flex autoconf meson libncurses-dev \
+    hwdata python3-pip python3-mako pkg-config
 
 sudo apt-get install libxml2-dev libffi-dev libudev-dev libevdev-dev libmtdev-dev \
     libpciaccess-dev libpng-dev libfontconfig1-dev libglib2.0-dev libelf-dev \
@@ -175,8 +175,17 @@ ninja -C $GFX_INSTALL/build/weston install
 mkdir -p $GFX_INSTALL/build/apitrace
 cd $GFX_INSTALL/build/apitrace
 cmake $GFX_SOURCE/apitrace -DCMAKE_INSTALL_PREFIX=$GFX_INSTALL \
-    -DENABLE_STATIC_LIBGCC=OFF -DENABLE_STATIC_LIBSTDCXX=OFF -DENABLE_X11=OFF \
-    -DENABLE_STATIC_SNAPPY=ON
+    -DENABLE_STATIC_LIBGCC=OFF -DENABLE_STATIC_LIBSTDCXX=OFF
+make
+make install
+```
+
+### nvtop
+
+``` bash
+mkdir -p $GFX_INSTALL/build/nvtop
+cd $GFX_INSTALL/build/nvtop
+cmake $GFX_SOURCE/nvtop -DCMAKE_INSTALL_PREFIX=$GFX_INSTALL
 make
 make install
 ```
@@ -198,23 +207,20 @@ export WAYLAND_DISPLAY=wayland-1
 $GFX_INSTALL/bin/weston-simple-egl
 ```
 
-## Using apitrace to trace egl/gl API calls
-
-Opening Terminal A to launch wayland-server:
+Using apitrace to trace egl/gl API calls, for example, trace egl calls of weston:
 
 ``` bash
 gfx_wayland_setup
-$GFX_INSTALL/bin/weston --debug --shell=desktop-shell.so
+$GFX_INSTALL/bin/apitrace trace --api=egl $GFX_INSTALL/bin/weston --debug --shell=desktop-shell.so
+$GFX_INSTALL/bin/apitrace dump weston.trace > weston-trace.txt
+cat weston-trace.txt
 ```
 
-Opening Terminal B to trace egl/gl api calls of wayland-client application:
+Using nvtop to monitor GPU runtime information:
 
 ``` bash
 gfx_wayland_setup
-export WAYLAND_DISPLAY=wayland-1
-$GFX_INSTALL/bin/apitrace trace --api=egl $GFX_INSTALL/bin/weston-simple-egl
-$GFX_INSTALL/bin/apitrace dump weston-simple-egl.trace > weston-simple-egl.txt
-cat weston-simple-egl.txt
+$GFX_INSTALL/bin/nvtop
 ```
 
 ## Reference

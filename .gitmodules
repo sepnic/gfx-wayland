@@ -37,3 +37,6 @@
 [submodule "apitrace"]
 	path = apitrace
 	url = https://github.com/apitrace/apitrace.git
+[submodule "nvtop"]
+	path = nvtop
+	url = https://github.com/Syllo/nvtop.git
