@@ -169,6 +169,18 @@ meson $GFX_INSTALL/build/weston --prefix=$GFX_INSTALL \
 ninja -C $GFX_INSTALL/build/weston install
 ```
 
+### apitrace
+
+``` bash
+mkdir -p $GFX_INSTALL/build/apitrace
+cd $GFX_INSTALL/build/apitrace
+cmake $GFX_SOURCE/apitrace -DCMAKE_INSTALL_PREFIX=$GFX_INSTALL \
+    -DENABLE_STATIC_LIBGCC=OFF -DENABLE_STATIC_LIBSTDCXX=OFF -DENABLE_X11=OFF \
+    -DENABLE_STATIC_SNAPPY=ON
+make
+make install
+```
+
 ## Running weston and wayland-client
 
 Opening Terminal A to launch wayland-server:
@@ -186,6 +198,25 @@ export WAYLAND_DISPLAY=wayland-1
 $GFX_INSTALL/bin/weston-simple-egl
 ```
 
+## Using apitrace to trace egl/gl API calls
+
+Opening Terminal A to launch wayland-server:
+
+``` bash
+gfx_wayland_setup
+$GFX_INSTALL/bin/weston --debug --shell=desktop-shell.so
+```
+
+Opening Terminal B to trace egl/gl api calls of wayland-client application:
+
+``` bash
+gfx_wayland_setup
+export WAYLAND_DISPLAY=wayland-1
+$GFX_INSTALL/bin/apitrace trace --api=egl $GFX_INSTALL/bin/weston-simple-egl
+$GFX_INSTALL/bin/apitrace dump weston-simple-egl.trace > weston-simple-egl.txt
+cat weston-simple-egl.txt
+```
+
 ## Reference
 
 - https://docs.mesa3d.org/install.html
@@ -193,4 +224,3 @@ $GFX_INSTALL/bin/weston-simple-egl
 - https://devblogs.microsoft.com/commandline/d3d12-gpu-video-acceleration-in-the-windows-subsystem-for-linux-now-available/
 - https://gitlab.freedesktop.org/mesa/mesa
 - https://gitlab.freedesktop.org/wayland/weston
-

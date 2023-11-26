@@ -34,3 +34,6 @@
 [submodule "weston"]
 	path = weston
 	url = https://gitlab.freedesktop.org/wayland/weston.git
+[submodule "apitrace"]
+	path = apitrace
+	url = https://github.com/apitrace/apitrace.git
