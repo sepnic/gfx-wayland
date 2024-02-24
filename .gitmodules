@@ -40,3 +40,6 @@
 [submodule "nvtop"]
 	path = nvtop
 	url = https://github.com/Syllo/nvtop.git
+[submodule "glmark2"]
+	path = glmark2
+	url = https://github.com/glmark2/glmark2.git
