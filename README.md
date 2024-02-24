@@ -55,7 +55,7 @@ function gfx_wayland_setup() {
 
 ``` bash
 cd $GFX_SOURCE/wayland/
-meson $GFX_INSTALL/build/wayland --prefix=$GFX_INSTALL -Ddocumentation=false
+meson $GFX_INSTALL/build/wayland --prefix=$GFX_INSTALL -Ddocumentation=false -Ddtd_validation=false
 ninja -C $GFX_INSTALL/build/wayland install
 ```
 
@@ -165,7 +165,8 @@ meson $GFX_INSTALL/build/weston --prefix=$GFX_INSTALL \
     -Dbackend-drm-screencast-vaapi=false -Dbackend-rdp=false \
     -Dbackend-x11=false -Dbackend-pipewire=false -Dbackend-vnc=false \
     -Dxwayland=false -Dremoting=false -Dpipewire=false \
-    -Dimage-jpeg=false -Dimage-webp=false -Ddemo-clients=false
+    -Dimage-jpeg=false -Dimage-webp=false \
+    -Ddemo-clients=false -Dtest-junit-xml=false
 ninja -C $GFX_INSTALL/build/weston install
 ```
 
