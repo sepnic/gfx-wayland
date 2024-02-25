@@ -18,7 +18,7 @@ sudo apt-get install cmake build-essential bison flex autoconf meson libncurses-
 
 sudo apt-get install libxml2-dev libffi-dev libudev-dev libevdev-dev libmtdev-dev \
     libpciaccess-dev libpng-dev libfontconfig1-dev libglib2.0-dev libelf-dev \
-    libsystemd-dev liblcms2-dev libpam0g-dev
+    libsystemd-dev libpam0g-dev
 
 ## Update meson if "ERROR: Meson version is 0.61.2 but project requires >= 0.63.0"
 pip3 install meson==0.63
@@ -166,7 +166,7 @@ meson $GFX_INSTALL/build/weston --prefix=$GFX_INSTALL \
     -Dbackend-drm-screencast-vaapi=false -Dbackend-rdp=false \
     -Dbackend-x11=false -Dbackend-pipewire=false -Dbackend-vnc=false \
     -Dxwayland=false -Dremoting=false -Dpipewire=false \
-    -Dimage-jpeg=false -Dimage-webp=false \
+    -Dcolor-management-lcms=false -Dimage-jpeg=false -Dimage-webp=false \
     -Ddemo-clients=false -Dtest-junit-xml=false
 ninja -C $GFX_INSTALL/build/weston install
 ```

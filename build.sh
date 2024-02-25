@@ -101,7 +101,7 @@ meson $GFX_INSTALL/build/weston --prefix=$GFX_INSTALL \
     -Dbackend-drm-screencast-vaapi=false -Dbackend-rdp=false \
     -Dbackend-x11=false -Dbackend-pipewire=false -Dbackend-vnc=false \
     -Dxwayland=false -Dremoting=false -Dpipewire=false \
-    -Dimage-jpeg=false -Dimage-webp=false \
+    -Dcolor-management-lcms=false -Dimage-jpeg=false -Dimage-webp=false \
     -Ddemo-clients=false -Dtest-junit-xml=false
 ninja -C $GFX_INSTALL/build/weston install
 
