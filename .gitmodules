@@ -1,45 +1,45 @@
 [submodule "DirectX-Headers"]
-	path = DirectX-Headers
+	path = src/DirectX-Headers
 	url = https://github.com/microsoft/DirectX-Headers.git
 [submodule "cairo"]
-	path = cairo
+	path = src/cairo
 	url = https://gitlab.freedesktop.org/cairo/cairo.git
 [submodule "libdrm"]
-	path = libdrm
+	path = src/libdrm
 	url = https://gitlab.freedesktop.org/mesa/drm.git
 [submodule "libdisplay-info"]
-	path = libdisplay-info
+	path = src/libdisplay-info
 	url = https://gitlab.freedesktop.org/emersion/libdisplay-info.git
 [submodule "libinput"]
-	path = libinput
+	path = src/libinput
 	url = https://gitlab.freedesktop.org/libinput/libinput
 [submodule "libxkbcommon"]
-	path = libxkbcommon
+	path = src/libxkbcommon
 	url = https://github.com/xkbcommon/libxkbcommon.git
 [submodule "mesa"]
-	path = mesa
+	path = src/mesa
 	url = https://gitlab.freedesktop.org/mesa/mesa.git
 [submodule "pixman"]
-	path = pixman
+	path = src/pixman
 	url = https://gitlab.freedesktop.org/pixman/pixman.git
 [submodule "seatd"]
-	path = seatd
+	path = src/seatd
 	url = https://git.sr.ht/~kennylevinsen/seatd
 [submodule "wayland"]
-	path = wayland
+	path = src/wayland
 	url = https://gitlab.freedesktop.org/wayland/wayland.git
 [submodule "wayland-protocols"]
-	path = wayland-protocols
+	path = src/wayland-protocols
 	url = https://gitlab.freedesktop.org/wayland/wayland-protocols.git
 [submodule "weston"]
-	path = weston
+	path = src/weston
 	url = https://gitlab.freedesktop.org/wayland/weston.git
 [submodule "apitrace"]
-	path = apitrace
+	path = src/apitrace
 	url = https://github.com/apitrace/apitrace.git
 [submodule "nvtop"]
-	path = nvtop
+	path = src/nvtop
 	url = https://github.com/Syllo/nvtop.git
 [submodule "glmark2"]
-	path = glmark2
+	path = src/glmark2
 	url = https://github.com/glmark2/glmark2.git
