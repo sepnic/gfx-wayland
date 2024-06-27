@@ -20,8 +20,8 @@ sudo apt-get install libxml2-dev libffi-dev libudev-dev libevdev-dev libmtdev-de
     libpciaccess-dev libpng-dev libfontconfig1-dev libglib2.0-dev libelf-dev \
     libsystemd-dev libpam0g-dev
 
-## Update meson if "ERROR: Meson version is 0.61.2 but project requires >= 0.63.0"
-pip3 install meson==0.63
+## Update meson if "ERROR: Meson version is 0.61.2 but project requires >= 1.3.0"
+pip3 install meson==1.3.0
 ```
 
 ## Setting up the environment
