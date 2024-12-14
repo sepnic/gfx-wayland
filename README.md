@@ -18,7 +18,7 @@ sudo apt-get install cmake build-essential bison flex autoconf meson libncurses-
 
 sudo apt-get install libxml2-dev libffi-dev libudev-dev libevdev-dev libmtdev-dev \
     libpciaccess-dev libpng-dev libfontconfig1-dev libglib2.0-dev libelf-dev \
-    libsystemd-dev libpam0g-dev
+    libsystemd-dev libpam0g-dev libwaffle-dev
 
 ## Update meson if "ERROR: Meson version is 0.61.2 but project requires >= 1.3.0"
 pip3 install meson==1.3.0
@@ -177,7 +177,8 @@ ninja -C $GFX_INSTALL/build/weston install
 mkdir -p $GFX_INSTALL/build/apitrace
 cd $GFX_INSTALL/build/apitrace
 cmake $GFX_SOURCE/apitrace -DCMAKE_INSTALL_PREFIX=$GFX_INSTALL \
-    -DENABLE_STATIC_LIBGCC=OFF -DENABLE_STATIC_LIBSTDCXX=OFF
+    -DENABLE_STATIC_LIBGCC=OFF -DENABLE_STATIC_LIBSTDCXX=OFF \
+    -DENABLE_WAFFLE=ON
 make
 make install
 ```
@@ -208,13 +209,20 @@ gfx_wayland_setup
 WAYLAND_DISPLAY=wayland-1 $GFX_INSTALL/bin/weston-simple-egl
 ```
 
-Using apitrace to trace egl/gl API calls, for example, trace egl calls of weston:
+Using apitrace to trace egl/gl API calls, for example, trace egl calls of weston-simple-egl:
 
 ``` bash
 gfx_wayland_setup
-$GFX_INSTALL/bin/apitrace trace --api=egl $GFX_INSTALL/bin/weston --debug --shell=desktop-shell.so
-$GFX_INSTALL/bin/apitrace dump weston.trace > weston-trace.txt
-cat weston-trace.txt
+WAYLAND_DISPLAY=wayland-1 $GFX_INSTALL/bin/apitrace trace --api=egl $GFX_INSTALL/bin/weston-simple-egl
+$GFX_INSTALL/bin/apitrace dump weston-simple-egl.trace > weston-simple-egl.txt
+cat weston-simple-egl.txt
+```
+
+Using apitrace to replay with an existing trace:
+
+``` bash
+gfx_wayland_setup
+WAFFLE_PLATFORM=wayland $GFX_INSTALL/bin/apitrace replay weston-simple-egl.trace
 ```
 
 Using nvtop to monitor GPU runtime information:
