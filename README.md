@@ -1,6 +1,6 @@
-# Build wayland/weston and mesa on Ubuntu-22.04
+# Build wayland/weston and mesa on Ubuntu-22.04/24.04
 
-Verified on WSL2, VMware Machine.
+Verified on WSL2 and VMware Machine.
 
 ## Downloading the code
 
@@ -48,6 +48,21 @@ function gfx_wayland_setup() {
     export CPLUS_INCLUDE_PATH=$GFX_INSTALL/include
     export LC_ALL=en_US.UTF8
 }
+```
+
+If seeing below errors when running weston on WSL Ubuntu-24.04
+
+```
+[11:19:34.741] Loading module '/home/sep/workspace/gfx-wayland/out/lib/x86_64-linux-gnu/libweston-13/wayland-backend.so'
+[11:19:34.742] Error: Failed to connect to parent Wayland compositor: No such file or directory
+               display option: (none), WAYLAND_DISPLAY=wayland-0
+[11:19:34.742] fatal: failed to create compositor backend
+```
+
+here is a workaround (refer to https://github.com/microsoft/WSL/issues/11261)
+
+``` bash
+ln -s /mnt/wslg/runtime-dir/wayland-0* /run/user/1000/
 ```
 
 ## Building wayland/weston and mesa
