@@ -43,3 +43,6 @@
 [submodule "glmark2"]
 	path = src/glmark2
 	url = https://github.com/glmark2/glmark2.git
+[submodule "src/wlroots"]
+	path = src/wlroots
+	url = https://gitlab.freedesktop.org/wlroots/wlroots.git
