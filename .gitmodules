@@ -1,6 +1,3 @@
-[submodule "DirectX-Headers"]
-	path = src/DirectX-Headers
-	url = https://github.com/microsoft/DirectX-Headers.git
 [submodule "cairo"]
 	path = src/cairo
 	url = https://gitlab.freedesktop.org/cairo/cairo.git
@@ -16,9 +13,6 @@
 [submodule "libxkbcommon"]
 	path = src/libxkbcommon
 	url = https://github.com/xkbcommon/libxkbcommon.git
-[submodule "mesa"]
-	path = src/mesa
-	url = https://gitlab.freedesktop.org/mesa/mesa.git
 [submodule "pixman"]
 	path = src/pixman
 	url = https://gitlab.freedesktop.org/pixman/pixman.git

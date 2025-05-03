@@ -1,4 +1,4 @@
-# Build wayland/weston and mesa on Ubuntu-22.04/24.04
+# Build wayland/weston on Ubuntu-22.04/24.04
 
 Verified on WSL2 and VMware Machine.
 
@@ -18,7 +18,8 @@ sudo apt-get install cmake build-essential bison flex autoconf meson libncurses-
 
 sudo apt-get install libxml2-dev libffi-dev libudev-dev libevdev-dev libmtdev-dev \
     libpciaccess-dev libpng-dev libfontconfig1-dev libglib2.0-dev libelf-dev \
-    libsystemd-dev libpam0g-dev libwaffle-dev qtbase5-dev
+    libsystemd-dev libpam0g-dev libwaffle-dev qtbase5-dev \
+    libegl1-mesa-dev libgles2-mesa-dev
 
 ## Update meson if "ERROR: Meson version is 0.61.2 but project requires >= 1.3.0"
 pip3 install meson==1.3.0
@@ -38,9 +39,9 @@ function gfx_wayland_setup() {
     export GFX_INSTALL=$GFX_TOP/out
     export EGL_PLATFORM=wayland
     export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS:$GFX_INSTALL/etc/xdg
-    export LD_LIBRARY_PATH=$GFX_INSTALL/lib:$GFX_INSTALL/lib/x86_64-linux-gnu:$GFX_INSTALL/lib/x86_64-linux-gnu/dri
+    export LD_LIBRARY_PATH=$GFX_INSTALL/lib:$GFX_INSTALL/lib/$(uname -m)-linux-gnu:$GFX_INSTALL/lib/$(uname -m)-linux-gnu/dri
     export LIBRARY_PATH=$GFX_INSTALL/lib:$LIBRARY_PATH
-    export PKG_CONFIG_PATH=$GFX_INSTALL/share/pkgconfig:$GFX_INSTALL/lib/pkgconfig:$GFX_INSTALL/lib64/pkgconfig:$GFX_INSTALL/lib/x86_64-linux-gnu/pkgconfig
+    export PKG_CONFIG_PATH=$GFX_INSTALL/share/pkgconfig:$GFX_INSTALL/lib/pkgconfig:$GFX_INSTALL/lib64/pkgconfig:$GFX_INSTALL/lib/$(uname -m)-linux-gnu/pkgconfig
     export PATH=$GFX_INSTALL:$GFX_INSTALL/bin:$PATH
     export ACLOCAL_PATH=$GFX_INSTALL/share/aclocal
     export ACLOCAL="aclocal -I $ACLOCAL_PATH"
@@ -65,7 +66,7 @@ here is a workaround (refer to https://github.com/microsoft/WSL/issues/11261)
 ln -s /mnt/wslg/runtime-dir/wayland-0* /run/user/1000/
 ```
 
-## Building wayland/weston and mesa
+## Building wayland/weston
 
 ### Wayland
 
@@ -142,27 +143,6 @@ cd $GFX_SOURCE/cairo/
 meson $GFX_INSTALL/build/cairo --prefix=$GFX_INSTALL \
     -Dtests=disabled -Dgtk2-utils=disabled -Dsymbol-lookup=disabled -Dgtk_doc=false
 ninja -C $GFX_INSTALL/build/cairo install
-```
-
-### DirectX-Headers
-
-``` bash
-cd $GFX_SOURCE/DirectX-Headers/
-meson $GFX_INSTALL/build/DirectX-Headers --prefix=$GFX_INSTALL -Dbuild-test=false
-ninja -C $GFX_INSTALL/build/DirectX-Headers install
-```
-
-### Mesa
-
-``` bash
-cd $GFX_SOURCE/mesa/
-meson $GFX_INSTALL/build/mesa --prefix=$GFX_INSTALL \
-    -Dgallium-drivers=swrast,nouveau,radeonsi,i915,svga,iris,d3d12 \
-    -Dvulkan-drivers= \
-    -Dplatforms=wayland -Degl=enabled -Dgles2=enabled \
-    -Dopengl=false -Dgles1=disabled -Dglx=disabled \
-    -Dllvm=disabled -Dshared-llvm=disabled -Dandroid-libbacktrace=disabled
-ninja -C $GFX_INSTALL/build/mesa install
 ```
 
 ### libdisplay-info
