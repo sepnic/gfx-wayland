@@ -3,13 +3,13 @@
 	url = https://gitlab.freedesktop.org/cairo/cairo.git
 [submodule "libdrm"]
 	path = src/libdrm
-	url = https://gitlab.freedesktop.org/mesa/drm.git
+	url = https://gitlab.freedesktop.org/mesa/libdrm.git
 [submodule "libdisplay-info"]
 	path = src/libdisplay-info
 	url = https://gitlab.freedesktop.org/emersion/libdisplay-info.git
 [submodule "libinput"]
 	path = src/libinput
-	url = https://gitlab.freedesktop.org/libinput/libinput
+	url = https://gitlab.freedesktop.org/libinput/libinput.git
 [submodule "libxkbcommon"]
 	path = src/libxkbcommon
 	url = https://github.com/xkbcommon/libxkbcommon.git

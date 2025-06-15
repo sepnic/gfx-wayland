@@ -65,8 +65,8 @@ ninja -C $GFX_INSTALL/build/libdrm install
 ### Pixman
 cd $GFX_SOURCE/pixman/
 meson $GFX_INSTALL/build/pixman --prefix=$GFX_INSTALL \
-    -Dloongson-mmi=disabled -Diwmmxt=disabled -Dmips-dspr2=disabled \
-    -Dvmx=disabled -Dgtk=disabled -Dlibpng=disabled
+    -Dloongson-mmi=disabled -Dmmx=disabled -Dmips-dspr2=disabled \
+    -Dvmx=disabled -Dgtk=disabled -Drvv=disabled -Dlibpng=disabled
 ninja -C $GFX_INSTALL/build/pixman install
 
 ### Cairo
@@ -95,7 +95,8 @@ mkdir -p $GFX_INSTALL/build/apitrace
 cd $GFX_INSTALL/build/apitrace
 cmake $GFX_SOURCE/apitrace -DCMAKE_INSTALL_PREFIX=$GFX_INSTALL \
     -DENABLE_STATIC_LIBGCC=OFF -DENABLE_STATIC_LIBSTDCXX=OFF \
-    -DENABLE_WAFFLE=ON -DENABLE_GUI=ON
+    -DENABLE_X11=OFF -DENABLE_EGL=ON \
+    -DENABLE_WAFFLE=ON -DBUILD_TESTING=OFF
 make
 make install
 
