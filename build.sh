@@ -83,6 +83,9 @@ ninja -C $GFX_INSTALL/build/libdisplay-info install
 ### Weston
 cd $GFX_SOURCE/weston/
 meson $GFX_INSTALL/build/weston --prefix=$GFX_INSTALL \
+    -Drenderer-gl=true -Drenderer-vulkan=true \
+    -Dshell-desktop=true -Dshell-ivi=true -Dshell-lua=false \
+    -Dbackend-drm=true -Dbackend-wayland=true -Dbackend-headless=true \
     -Dbackend-drm-screencast-vaapi=false -Dbackend-rdp=false \
     -Dbackend-x11=false -Dbackend-pipewire=false -Dbackend-vnc=false \
     -Dxwayland=false -Dremoting=false -Dpipewire=false \

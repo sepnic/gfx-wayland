@@ -19,7 +19,7 @@ sudo apt-get install cmake build-essential bison flex autoconf meson libncurses-
 sudo apt-get install libxml2-dev libffi-dev libudev-dev libevdev-dev libmtdev-dev \
     libpciaccess-dev libpng-dev libfontconfig1-dev libglib2.0-dev libelf-dev \
     libsystemd-dev libpam0g-dev libwaffle-dev qtbase5-dev \
-    libegl1-mesa-dev libgles2-mesa-dev
+    libegl1-mesa-dev libgles2-mesa-dev glslang-tools
 
 ## Update meson if "ERROR: Meson version is 0.61.2 but project requires >= 1.3.0"
 pip3 install meson==1.3.0
@@ -158,6 +158,9 @@ ninja -C $GFX_INSTALL/build/libdisplay-info install
 ``` bash
 cd $GFX_SOURCE/weston/
 meson $GFX_INSTALL/build/weston --prefix=$GFX_INSTALL \
+    -Drenderer-gl=true -Drenderer-vulkan=true \
+    -Dshell-desktop=true -Dshell-ivi=true -Dshell-lua=false \
+    -Dbackend-drm=true -Dbackend-wayland=true -Dbackend-headless=true \
     -Dbackend-drm-screencast-vaapi=false -Dbackend-rdp=false \
     -Dbackend-x11=false -Dbackend-pipewire=false -Dbackend-vnc=false \
     -Dxwayland=false -Dremoting=false -Dpipewire=false \
